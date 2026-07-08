@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AdHabits — Meta Ads Infrastructure For Real Estate Builders, Channel Partners & Brokers. Fill your site visits with qualified property buyers, not walk-in time-wasters." />
+  <meta name="keywords" content="meta ads, real estate marketing, real estate leads, site visit leads, property leads, adhabits, rahman" />
+  <meta name="author" content="AdHabits" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:title" content="AdHabits — Fill Your Site Visits With Real Buyers, Not Time-Wasters" />
+  <meta property="og:description" content="Stop depending on portals and broker networks. Deploy a predictable buyer acquisition engine for your real estate project." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://adhabits.in" />
+  <meta property="og:image" content="https://i.postimg.cc/3rVMTKYG/adhabits-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://i.postimg.cc/3rVMTKYG/adhabits-logo.png" type="image/png" />
+
+  <title>AdHabits — Meta Ads Infrastructure For Real Estate Builders & Channel Partners</title>
+
+  <style>
+    /* ============================================
+       DESIGN TOKENS
+    ============================================ */
+    :root {
+      /* Background layers */
+      --bg-base: #060810;
+      --bg-surface: #0d1120;
+      --bg-elevated: #131929;
+      --bg-card: #111827;
+      --bg-input: #0a0f1a;
+
+      /* Text */
+      --text-primary: #f0f4ff;
+      --text-secondary: #8b97b4;
+      --text-muted: #4d5a73;
+      --text-on-accent: #ffffff;
+
+      /* Strokes */
+      --stroke: rgba(255,255,255,0.06);
+      --stroke-hover: rgba(139, 92, 246, 0.4);
+      --stroke-accent: rgba(139, 92, 246, 0.2);
+
+      /* Accent palette */
+      --violet: #7c3aed;
+      --violet-light: #a78bfa;
+      --violet-dim: rgba(124, 58, 237, 0.12);
+      --cyan: #22d3ee;
+      --cyan-dim: rgba(34, 211, 238, 0.08);
+      --whatsapp: #25d366;
+
+      /* Gradients */
+      --grad-primary: linear-gradient(135deg, #7c3aed, #5b21b6);
+      --grad-text: linear-gradient(135deg, #a78bfa, #22d3ee);
+      --grad-card-border: linear-gradient(135deg, rgba(139,92,246,0.3), rgba(34,211,238,0.15));
+
+      /* Shadows */
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.5);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+      --shadow-glow: 0 0 40px rgba(124,58,237,0.2);
+    }
+
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      font-size: 17px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+    button { font-family: inherit; }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================
+       TYPOGRAPHY SCALE
+    ============================================ */
+    .display-1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+    .display-2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+    .display-3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(22px, 2.5vw, 32px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .grad-text {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    /* ============================================
+       LAYOUT HELPERS
+    ============================================ */
+    .section {
+      padding: 100px 0;
+    }
+    @media (max-width: 768px) {
+      .section { padding: 70px 0; }
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border: 1px solid var(--stroke-accent);
+      border-radius: 999px;
+      background: var(--violet-dim);
+      color: var(--violet-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--violet-light);
+      border-radius: 50%;
+    }
+
+    .section-header {
+      max-width: 680px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+    .section-header .lead {
+      margin-top: 16px;
+      color: var(--text-secondary);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       DIVIDER LINE
+    ============================================ */
+    .rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--stroke-accent), transparent);
+      border: none;
+    }
+
+    /* ============================================
+       NAVIGATION
+    ============================================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 8, 16, 0.9);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--stroke);
+    }
+    .nav-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+    .nav-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--grad-primary);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+    }
+    .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    .hero {
+      position: relative;
+      padding: 100px 0 80px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 65%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 65%);
+    }
+    /* Noise grain texture */
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      border: 1px solid var(--stroke-accent);
+      border-radius: 999px;
+      background: rgba(124,58,237,0.08);
+      color: var(--violet-light);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: var(--violet-light);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(167,139,250,0.5); }
+      50% { box-shadow: 0 0 0 6px rgba(167,139,250,0); }
+    }
+
+    .hero h1 {
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--grad-primary);
+      border-radius: 14px;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 28px rgba(124,58,237,0.4), 0 0 0 1px rgba(167,139,250,0.1);
+      letter-spacing: -0.01em;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(124,58,237,0.55), 0 0 0 1px rgba(167,139,250,0.2);
+    }
+    .btn-primary svg { transition: transform 0.2s ease; }
+    .btn-primary:hover svg { transform: translateX(4px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 28px;
+      border: 1px solid var(--stroke-accent);
+      border-radius: 14px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 15px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .btn-ghost:hover {
+      border-color: var(--violet-light);
+      color: var(--text-primary);
+      background: var(--violet-dim);
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 52px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .trust-item svg { color: var(--violet-light); flex-shrink: 0; }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 64px;
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      background: var(--bg-surface);
+      overflow: hidden;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-stat {
+      flex: 1;
+      padding: 28px 24px;
+      text-align: center;
+      border-right: 1px solid var(--stroke);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat .num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 34px;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .hero-stat .num span {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-stat .lbl {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    @media (max-width: 540px) {
+      .hero-stat { padding: 20px 14px; }
+      .hero-stat .num { font-size: 26px; }
+    }
+
+    /* ============================================
+       VIDEO PROOF
+    ============================================ */
+    .proof-section {
+      padding: 0 0 100px;
+    }
+    @media (max-width: 768px) { .proof-section { padding: 0 0 70px; } }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (min-width: 900px) {
+      .video-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .video-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--stroke);
+      background: var(--bg-card);
+      aspect-ratio: 9/16;
+    }
+    .video-card iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .video-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      box-shadow: inset 0 0 0 1px rgba(139,92,246,0.15);
+      pointer-events: none;
+    }
+
+    /* ============================================
+       CAROUSEL
+    ============================================ */
+    .carousel-section {
+      padding: 0 0 100px;
+      overflow: hidden;
+    }
+    @media (max-width: 768px) { .carousel-section { padding: 0 0 70px; } }
+
+    .carousel-wrapper { overflow: hidden; }
+    .carousel-track {
+      display: flex;
+      gap: 14px;
+      animation: scrollLeft 38s linear infinite;
+      width: max-content;
+    }
+    .carousel-track:hover { animation-play-state: paused; }
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .carousel-card {
+      flex: 0 0 auto;
+      width: 200px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--stroke);
+      background: var(--bg-card);
+      transition: transform 0.3s ease;
+    }
+    .carousel-card:hover { transform: translateY(-6px); }
+    .carousel-card img {
+      width: 100%;
+      aspect-ratio: 9/19.5;
+      object-fit: cover;
+    }
+
+    /* ============================================
+       PAIN SECTION
+    ============================================ */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--stroke);
+    }
+    @media (max-width: 600px) {
+      .pain-grid { grid-template-columns: 1fr; }
+    }
+    .pain-card {
+      background: var(--bg-card);
+      padding: 36px 32px;
+      transition: background 0.3s ease;
+    }
+    .pain-card:hover { background: var(--bg-elevated); }
+    .pain-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+    .pain-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .pain-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       SOLUTION / FRAMEWORK
+    ============================================ */
+    .framework-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .framework-step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 0 28px;
+      position: relative;
+      padding-bottom: 40px;
+    }
+    .framework-step:last-child { padding-bottom: 0; }
+    .framework-step:last-child .step-line { display: none; }
+
+    .step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step-num-circle {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--violet-dim);
+      border: 2px solid var(--stroke-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--violet-light);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+    .framework-step:hover .step-num-circle {
+      background: var(--violet);
+      border-color: var(--violet-light);
+      color: #fff;
+      box-shadow: 0 0 24px rgba(124,58,237,0.4);
+    }
+    .step-line {
+      flex: 1;
+      width: 2px;
+      background: linear-gradient(180deg, var(--stroke-accent), transparent);
+      margin-top: 8px;
+    }
+    .step-right {
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+    .step-right h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .step-right p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 620px;
+    }
+
+    @media (max-width: 480px) {
+      .framework-step { grid-template-columns: 44px 1fr; gap: 0 18px; }
+      .step-num-circle { width: 40px; height: 40px; font-size: 15px; }
+      .step-right h3 { font-size: 17px; }
+    }
+
+    /* ============================================
+       ABOUT / FOUNDER
+    ============================================ */
+    .founder-wrap {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .founder-wrap { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .founder-img-wrap {
+      position: relative;
+    }
+    .founder-img-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    .founder-img-frame img { width: 100%; display: block; }
+    .founder-img-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      box-shadow: inset 0 -80px 60px rgba(6,8,16,0.7);
+      pointer-events: none;
+    }
+
+    .founder-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--stroke-accent);
+      border-radius: 16px;
+      padding: 14px 18px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    .founder-badge .badge-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--violet-light);
+      line-height: 1;
+    }
+    .founder-badge .badge-lbl {
+      color: var(--text-secondary);
+      font-size: 11px;
+      margin-top: 4px;
+    }
+    @media (max-width: 900px) {
+      .founder-badge { bottom: 16px; right: 16px; }
+    }
+
+    .founder-copy .eyebrow {
+      display: inline-block;
+      color: var(--violet-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .founder-copy h2 { margin-bottom: 20px; }
+    .founder-copy p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .founder-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 28px 0;
+    }
+    .f-stat {
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      padding: 18px 14px;
+      background: var(--bg-surface);
+      text-align: center;
+      transition: border-color 0.2s ease;
+    }
+    .f-stat:hover { border-color: var(--stroke-accent); }
+    .f-stat .num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 26px;
+      color: var(--violet-light);
+      line-height: 1;
+    }
+    .f-stat .lbl {
+      color: var(--text-muted);
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    /* ============================================
+       CASE STUDIES
+    ============================================ */
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .case-grid { grid-template-columns: 1fr; } }
+
+    .case-card {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .case-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--grad-text);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .case-card:hover { border-color: var(--stroke-accent); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+    .case-card:hover::before { opacity: 1; }
+
+    .case-phase {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .case-phase-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .case-phase p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .case-divider {
+      height: 1px;
+      background: var(--stroke);
+    }
+
+    .case-result {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .result-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      letter-spacing: -0.03em;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .result-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ============================================
+       COMPARISON TABLE
+    ============================================ */
+    .compare-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    .compare-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--stroke);
+    }
+    .compare-head div {
+      padding: 20px 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .compare-head .col-us {
+      background: var(--violet-dim);
+      border-left: 1px solid var(--stroke-accent);
+      border-right: 1px solid var(--stroke-accent);
+      color: var(--violet-light);
+      text-align: center;
+    }
+    .compare-head .col-other { color: var(--text-muted); }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--stroke);
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row div {
+      padding: 18px 24px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .compare-row .col-feature {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 13px;
+    }
+    .compare-row .col-us {
+      background: rgba(124,58,237,0.04);
+      border-left: 1px solid var(--stroke-accent);
+      border-right: 1px solid var(--stroke-accent);
+      font-weight: 600;
+      color: var(--text-primary);
+      justify-content: center;
+      text-align: center;
+    }
+    .check { color: #34d399; font-size: 16px; }
+    .cross { color: #f87171; font-size: 16px; }
+
+    @media (max-width: 600px) {
+      .compare-head, .compare-row { grid-template-columns: 1fr; }
+      .compare-head .col-other { display: none; }
+      .compare-row div:first-child { font-size: 12px; padding-bottom: 4px; }
+    }
+
+    /* ============================================
+       FAQ
+    ============================================ */
+    .faq-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      background: var(--bg-card);
+      transition: border-color 0.2s ease;
+    }
+    .faq-item.open { border-color: var(--stroke-accent); }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+    .faq-q:hover { background: var(--violet-dim); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border: 1px solid var(--stroke-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--violet-light);
+      font-size: 16px;
+      line-height: 1;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--violet);
+      border-color: var(--violet);
+      color: #fff;
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner {
+      padding: 0 24px 20px;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       SCHEDULER / BOOKING
+    ============================================ */
+    .booking-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .booking-top {
+      padding: 40px 40px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      border-bottom: 1px solid var(--stroke);
+    }
+    @media (max-width: 600px) {
+      .booking-top { grid-template-columns: 1fr; padding: 28px 24px 24px; }
+    }
+    .booking-top h2 { margin-bottom: 8px; }
+    .booking-top p {
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+    .scarcity-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.25);
+      border-radius: 10px;
+      color: #fca5a5;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .scarcity-dot {
+      width: 7px; height: 7px;
+      background: #ef4444;
+      border-radius: 50%;
+      animation: blink 1.2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .cal-iframe {
+      width: 100%;
+      min-height: 650px;
+      border: none;
+      display: block;
+    }
+
+    /* ============================================
+       WHATSAPP FORM
+    ============================================ */
+    .form-section-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .form-section-wrap { grid-template-columns: 1fr; }
+    }
+
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 36px 32px;
+    }
+    @media (max-width: 480px) { .form-card { padding: 24px 20px; } }
+
+    .form-title { margin-bottom: 6px; }
+    .form-sub {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    /* Progress bar */
+    .form-progress {
+      margin-bottom: 24px;
+    }
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 8px;
+    }
+    .p-step {
+      flex: 1;
+      height: 3px;
+      background: var(--stroke);
+      border-radius: 2px;
+      transition: background 0.3s ease;
+      margin-right: 4px;
+    }
+    .p-step:last-child { margin-right: 0; }
+    .p-step.active { background: var(--violet); }
+    .p-step.done { background: var(--cyan); }
+    .progress-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .field-group { margin-bottom: 16px; }
+    .field-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+    .field-input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--stroke);
+      border-radius: 12px;
+      color: var(--text-primary);
+      padding: 13px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      -webkit-appearance: none;
+    }
+    .field-input:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+    }
+    select.field-input { cursor: pointer; }
+    select.field-input option { background: var(--bg-card); color: var(--text-primary); }
+
+    .wa-btn {
+      margin-top: 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: var(--whatsapp);
+      border-radius: 12px;
+      color: #0a0f1a;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    }
+    .wa-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(37,211,102,0.45);
+    }
+    .wa-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .form-fine {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    /* Form aside benefits */
+    .form-aside {
+      background: var(--bg-card);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    @media (max-width: 480px) { .form-aside { padding: 24px 20px; } }
+
+    .aside-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .a-stat {
+      background: var(--bg-input);
+      border: 1px solid var(--stroke);
+      border-radius: 12px;
+      padding: 18px 10px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .a-stat:hover { border-color: var(--stroke-accent); }
+    .a-stat .num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--violet-light);
+      line-height: 1;
+    }
+    .a-stat .lbl {
+      color: var(--text-muted);
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    .benefit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .benefit-icon {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: rgba(52,211,153,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      border-top: 1px solid var(--stroke);
+      padding: 56px 0 40px;
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .footer-brand img { width: 32px; height: 32px; border-radius: 8px; }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-primary); }
+
+    .footer-divider {
+      height: 1px;
+      background: var(--stroke);
+      margin-bottom: 28px;
+    }
+    .footer-disclaimer {
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      max-width: 900px;
+    }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    .footer-contact a {
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--violet-light); }
+
+    /* ============================================
+       WHATSAPP FLOAT
+    ============================================ */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .wa-float-badge {
+      background: var(--bg-elevated);
+      border: 1px solid var(--stroke);
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+      animation: floatPulse 3s ease-in-out infinite;
+    }
+    @keyframes floatPulse {
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 0.7; transform: translateY(-2px); }
+    }
+    .wa-float-btn {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: var(--whatsapp);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .wa-float-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 32px rgba(37,211,102,0.55);
+    }
+    .wa-float-btn svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* ============================================
+       ANIMATIONS
+    ============================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.on {
+      opacity: 1;
+      transform: none;
+    }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .carousel-track { animation: none; transition: none; opacity: 1; transform: none; }
+    }
+
+    /* ============================================
+       UTILITY
+    ============================================ */
+    .text-center { text-align: center; }
+    .mb-4 { margin-bottom: 16px; }
+    .mt-4 { margin-top: 16px; }
+  </style>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('set','autoConfig',false,'1609093500184090');
+    fbq('init','1609093500184090');
+    fbq('trackSingle','1609093500184090','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1609093500184090&ev=PageView&noscript=1"/></noscript>
+
+  <base target="_blank">
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+============================================ -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="/" target="_self" class="nav-brand">
+      <img src="https://i.postimg.cc/3rVMTKYG/adhabits-logo.png" alt="AdHabits" />
+      AdHabits
+    </a>
+    <a href="#schedule" target="_self" class="nav-cta">
+      Book Free Audit
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ============================================
+     HERO
+============================================ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge fade-up">
+        <span class="hero-badge-dot"></span>
+        Meta Ads Infrastructure · Real Estate Sales
+      </div>
+
+      <h1 class="display-1 fade-up delay-1">
+        Stop Waiting On<br>
+        <span class="grad-text">Portals & Referrals.</span><br>
+        Build A System That<br>Fills Your Site Visits.
+      </h1>
+
+      <p class="hero-sub fade-up delay-2">
+        We build Meta Ads infrastructure that puts qualified, ready-to-visit property buyers in front of builders, channel partners, and brokers — without depending on 99acres, Housing.com, or cold broker calls.
+      </p>
+
+      <div class="hero-cta-row fade-up delay-3">
+        <a href="#schedule" target="_self" class="btn-primary">
+          Book Free Growth Audit
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#whatsapp-form" target="_self" class="btn-ghost">
+          Chat on WhatsApp →
+        </a>
+      </div>
+
+      <div class="hero-trust fade-up">
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          150+ Real Estate Clients Scaled
+        </span>
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          ₹50L+ Ad Spend Managed
+        </span>
+        <span class="trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          3+ Years in Meta Ads
+        </span>
+      </div>
+
+      <div class="hero-stats fade-up">
+        <div class="hero-stat">
+          <div class="num"><span>150+</span></div>
+          <div class="lbl">Real Estate Clients</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num"><span>₹50L+</span></div>
+          <div class="lbl">Ad Spend Managed</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num"><span>3+</span></div>
+          <div class="lbl">Years Experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     VIDEO PROOF
+============================================ -->
+<section class="proof-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">Client Testimonials</span>
+      <h2 class="display-2">They Said It Better<br>Than We Could</h2>
+      <p class="lead">Real builders. Real channel partners. Real numbers. No stock footage.</p>
+    </div>
+    <div class="video-grid fade-up">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/22S_KlKYzP8?rel=0&modestbranding=1&playsinline=1" title="Client Result 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/cxCnF8go0MM?rel=0&modestbranding=1&playsinline=1" title="Client Result 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/vBWFbX9u3EU?rel=0&modestbranding=1&playsinline=1" title="Client Result 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/cF9HqmGrdz0?rel=0&modestbranding=1&playsinline=1" title="Client Result 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CAROUSEL
+============================================ -->
+<section class="carousel-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">WhatsApp Proof</span>
+      <h2 class="display-2">Real Clients. Real Results.</h2>
+      <p class="lead">Unedited screenshots from builders and channel partners who scaled with our Meta Ads system.</p>
+    </div>
+  </div>
+  <div class="carousel-wrapper">
+    <div class="carousel-track">
+      <div class="carousel-card"><img src="https://i.postimg.cc/PJtN2tcP/nasreen-mam-finel.jpg" alt="Nasreen — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/G3qpbnVx/Rukkaya-appi-finel.jpg" alt="Rukkaya — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/LXSzFFwM/Farheen-mam.jpg" alt="Farheen — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/vBDGBcp7/Firdous-finel.jpg" alt="Firdous — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/CxF50LL7/Ahemadi-mam-finel.jpg" alt="Ahemadi — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/nhcF5R0w/balvinder-finel.jpg" alt="Balvinder — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/rFhXd8NQ/faizeen-finel.jpg" alt="Faizeen — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/FRbwhmKb/Nadeem-finel.jpg" alt="Nadeem — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/pL97pKTL/Rukhsaar-finel.jpg" alt="Rukhsaar — Client Result" loading="lazy" /></div>
+      <!-- Duplicates for seamless loop -->
+      <div class="carousel-card"><img src="https://i.postimg.cc/PJtN2tcP/nasreen-mam-finel.jpg" alt="Nasreen — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/G3qpbnVx/Rukkaya-appi-finel.jpg" alt="Rukkaya — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/LXSzFFwM/Farheen-mam.jpg" alt="Farheen — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/vBDGBcp7/Firdous-finel.jpg" alt="Firdous — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/CxF50LL7/Ahemadi-mam-finel.jpg" alt="Ahemadi — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/nhcF5R0w/balvinder-finel.jpg" alt="Balvinder — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/rFhXd8NQ/faizeen-finel.jpg" alt="Faizeen — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/FRbwhmKb/Nadeem-finel.jpg" alt="Nadeem — Client Result" loading="lazy" /></div>
+      <div class="carousel-card"><img src="https://i.postimg.cc/pL97pKTL/Rukhsaar-finel.jpg" alt="Rukhsaar — Client Result" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ============================================
+     BOOKING / SCHEDULE
+============================================ -->
+<section class="section" id="schedule">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">Book Your Call</span>
+      <h2 class="display-2">Ready To Fill Your<br>Site Visits With Buyers?</h2>
+      <p class="lead">Only serious builders and channel partners. Only 5 new clients per month.</p>
+    </div>
+    <div class="booking-wrap fade-up">
+      <div class="booking-top">
+        <div>
+          <h2 class="display-3">Free Growth Audit Call</h2>
+          <p>45 minutes. We'll audit your current lead setup, identify the gaps, and map your exact path to a full site-visit calendar. No fluff, no pitch decks.</p>
+        </div>
+        <div class="scarcity-badge">
+          <span class="scarcity-dot"></span>
+          Only 5 Spots / Month
+        </div>
+      </div>
+      <iframe class="cal-iframe" src="https://cal.com/ad-habits-pxhadl/adhabits?theme=dark" title="Book a Strategy Call with AdHabits" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ============================================
+     PAIN SECTION
+============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">The Real Problem</span>
+      <h2 class="display-2">Why Most Real Estate<br>Projects Never Hit Their Sales Target</h2>
+      <p class="lead">It's not the project. It's not the pricing. It's one of these four invisible walls.</p>
+    </div>
+    <div class="pain-grid fade-up">
+      <div class="pain-card">
+        <div class="pain-icon">📉</div>
+        <h3>No Predictable Buyer Pipeline</h3>
+        <p>You wake up every month not knowing where your next site visit will come from. Broker referrals dry up. Portal leads get shared with five other builders at once. Without your own acquisition engine, your sales calendar is always empty until someone else fills it for you.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🏢</div>
+        <h3>Portal & Broker Dependency Trap</h3>
+        <p>99acres, Housing.com, and channel partner networks sell the same lead to every project in your category. You're not building a buyer list — you're renting attention that any competitor with a bigger budget can outbid you for tomorrow.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🚶</div>
+        <h3>Site Visits That Don't Convert</h3>
+        <p>Your sales team drives 15 site visits a week and closes one deal. That's not a closing problem — it's a filtering problem. Unqualified footfall wastes your sales team's time and your marketing budget on people who were never going to buy.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">👻</div>
+        <h3>Unqualified, Uncommitted Enquiries</h3>
+        <p>Buyers give a missed call, ask for the brochure, and disappear. The problem isn't your sales pitch — it's that your ads aren't pre-qualifying budget and intent before the enquiry reaches your CRM. Garbage in, garbage out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ============================================
+     SOLUTION / FRAMEWORK
+============================================ -->
+<section class="section" id="solution">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">The AdHabits Method</span>
+      <h2 class="display-2">The Growth Engine Behind<br>Fully Booked Site Visits</h2>
+      <p class="lead">Five interlocked systems. Each one breaks the bottleneck the previous one creates.</p>
+    </div>
+    <div class="framework-container fade-up">
+
+      <div class="framework-step">
+        <div class="step-left">
+          <div class="step-num-circle">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <h3>Project Positioning for Cold Traffic</h3>
+          <p>Most project brochures are built for people who already walked in. We rebuild your positioning for strangers scrolling Instagram at 11pm. Location advantage, price anchoring, RERA credibility, and the exact transformation your project sells — engineered so a cold buyer stops scrolling.</p>
+        </div>
+      </div>
+
+      <div class="framework-step">
+        <div class="step-left">
+          <div class="step-num-circle">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <h3>Ad Creatives That Pre-Qualify Buyer Intent</h3>
+          <p>We write and structure ad creatives so specific to your target buyer — budget range, family stage, location preference — that the right person feels personally called out, and browsers who were never going to buy scroll past. Precision targeting through messaging means lower cost per lead and higher-quality site visits.</p>
+        </div>
+      </div>
+
+      <div class="framework-step">
+        <div class="step-left">
+          <div class="step-num-circle">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <h3>Funnel Architecture That Converts</h3>
+          <p>We don't template your funnel — we engineer it for your project's ticket size and buyer trust level. Quick-Form, WhatsApp brochure funnel, virtual site-tour VSL, or multi-step qualification form. We build and launch the right one for your inventory.</p>
+        </div>
+      </div>
+
+      <div class="framework-step">
+        <div class="step-left">
+          <div class="step-num-circle">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <h3>Lead Qualification & Nurture Sequences</h3>
+          <p>Enquiries who aren't ready to visit today still have value. We set up pre-visit WhatsApp sequences and budget-qualification filters that warm prospects, eliminate window-shoppers, and fill your sales team's calendar with buyers who already want what your project offers.</p>
+        </div>
+      </div>
+
+      <div class="framework-step">
+        <div class="step-left">
+          <div class="step-num-circle">5</div>
+        </div>
+        <div class="step-right">
+          <h3>Conversion System & Scale Infrastructure</h3>
+          <p>Once your funnel converts at a profitable cost per site visit, we scale. Budget scaling protocols, creative refresh cycles, catchment-area expansion, and retargeting stacks — built to maintain your cost per booking as spend increases, not collapse under it.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ============================================
+     ABOUT / FOUNDER
+============================================ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="founder-wrap">
+      <div class="founder-img-wrap fade-up">
+        <div class="founder-img-frame">
+          <img src="https://i.postimg.cc/cC2f5c0G/IMG-5862-2.avif" alt="Rahman — Meta Ads Expert & Founder of AdHabits" loading="lazy" />
+        </div>
+        <div class="founder-badge">
+          <div class="badge-num">150+</div>
+          <div class="badge-lbl">Real Estate Clients</div>
+        </div>
+      </div>
+
+      <div class="founder-copy fade-up delay-2">
+        <span class="eyebrow">Your Expert</span>
+        <h2 class="display-3">Meet Rahman —<br>The Man Behind<br><span class="grad-text">Your Buyer Pipeline</span></h2>
+        <p>I spent my first months in real estate marketing doing exactly what most builders still do — running boosted posts, waiting on channel partners, and wondering why the same handful of brokers bring in every lead.</p>
+        <p>Then I went all-in on Meta Ads. Not the "boost your post" nonsense — real infrastructure. Project positioning. Site-visit funnels. Buyer retargeting stacks. In 18 months, I went from ₹0 in ad spend to managing ₹50L+ for builders, channel partners, and independent brokers across Jaipur, Indore, and beyond.</p>
+        <p>I'm not an agency with 12 account managers. I run your campaigns. You get direct access. That's the AdHabits difference.</p>
+
+        <div class="founder-stats-row">
+          <div class="f-stat">
+            <div class="num">3+</div>
+            <div class="lbl">Years in Meta Ads</div>
+          </div>
+          <div class="f-stat">
+            <div class="num">₹50L+</div>
+            <div class="lbl">Ad Budget Managed</div>
+          </div>
+          <div class="f-stat">
+            <div class="num">150+</div>
+            <div class="lbl">Clients Scaled</div>
+          </div>
+        </div>
+
+        <a href="#schedule" target="_self" class="btn-primary">
+          Work With Rahman
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ============================================
+     CASE STUDIES
+============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">Case Studies</span>
+      <h2 class="display-2">Challenge → Strategy → Result</h2>
+      <p class="lead">Three real client transformations from our Meta Ads system.</p>
+    </div>
+    <div class="case-grid fade-up">
+
+      <div class="case-card">
+        <div class="case-phase">
+          <span class="case-phase-label">Challenge</span>
+          <p>Residential builder in Jaipur spending ₹10,000/month on boosted posts with no system. Getting 30–40 missed-call enquiries, zero confirmed site visits. Sales stuck at 2 units/month for 3 months straight.</p>
+        </div>
+        <div class="case-divider"></div>
+        <div class="case-phase">
+          <span class="case-phase-label">Strategy</span>
+          <p>Rebuilt project positioning for cold traffic. Moved from a plain lead form to a WhatsApp brochure + visit-booking funnel. Added a pre-visit budget-qualification sequence.</p>
+        </div>
+        <div class="case-divider"></div>
+        <div class="case-result">
+          <div class="result-num">22</div>
+          <div class="result-desc">Confirmed site visits in month 2 after system launch. Cost per visit dropped 55%.</div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-phase">
+          <span class="case-phase-label">Challenge</span>
+          <p>Channel partner selling plotted developments in Indore with strong local network but zero paid traffic experience. Wanted to scale but afraid of burning budget on unqualified footfall.</p>
+        </div>
+        <div class="case-divider"></div>
+        <div class="case-phase">
+          <span class="case-phase-label">Strategy</span>
+          <p>Started with a ₹8,000 test budget. Rapid creative testing across 6 ad variations in 12 days. Found the winning hook in week 2. Scaled to ₹30,000/month within a month.</p>
+        </div>
+        <div class="case-divider"></div>
+        <div class="case-result">
+          <div class="result-num">6x</div>
+          <div class="result-desc">Increase in booked site visits within 45 days. 4 plot bookings closed by month 3.</div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-phase">
+          <span class="case-phase-label">Challenge</span>
+          <p>Independent broker handling a commercial project with 15 enquiries/day from portal leads — but a 1% closing rate. Leads were unfiltered, uncommitted, and budget-mismatched.</p>
+        </div>
+        <div class="case-divider"></div>
+        <div class="case-phase">
+          <span class="case-phase-label">Strategy</span>
+          <p>Shifted from awareness ads to a budget-qualification funnel. Added investment-range and purpose (self-use vs investment) fields. Reduced enquiries to 5/day but tripled the site-visit-to-booking rate.</p>
+        </div>
+        <div class="case-divider"></div>
+        <div class="case-result">
+          <div class="result-num">3x</div>
+          <div class="result-desc">Bookings on fewer, better-qualified leads. Time spent on dead-end site visits cut by 60%.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ============================================
+     COMPARISON TABLE
+============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">Why AdHabits</span>
+      <h2 class="display-2">Not All Ad Agencies<br>Are Built the Same</h2>
+      <p class="lead">Here's the honest difference between us and everyone else.</p>
+    </div>
+    <div class="compare-wrap fade-up">
+      <div class="compare-head">
+        <div>Feature</div>
+        <div class="col-us">✦ AdHabits</div>
+        <div class="col-other">Other Agencies</div>
+      </div>
+      <div class="compare-row">
+        <div class="col-feature">Real estate-specific experience</div>
+        <div class="col-us"><span class="check">✓</span> 150+ builders & brokers scaled</div>
+        <div><span class="cross">✗</span> Generic marketing</div>
+      </div>
+      <div class="compare-row">
+        <div class="col-feature">Direct access to expert</div>
+        <div class="col-us"><span class="check">✓</span> Rahman runs your campaigns</div>
+        <div><span class="cross">✗</span> Junior account managers</div>
+      </div>
+      <div class="compare-row">
+        <div class="col-feature">Project positioning + funnel rebuild</div>
+        <div class="col-us"><span class="check">✓</span> Included in every engagement</div>
+        <div><span class="cross">✗</span> Runs ads on a plain lead form</div>
+      </div>
+      <div class="compare-row">
+        <div class="col-feature">Inventory-specific strategy</div>
+        <div class="col-us"><span class="check">✓</span> Residential, plots, commercial, pre-launch</div>
+        <div><span class="cross">✗</span> One-size-fits-all playbook</div>
+      </div>
+      <div class="compare-row">
+        <div class="col-feature">Buyer qualification built in</div>
+        <div class="col-us"><span class="check">✓</span> Pre-visit WhatsApp sequences</div>
+        <div><span class="cross">✗</span> Dumps enquiries in a spreadsheet</div>
+      </div>
+      <div class="compare-row">
+        <div class="col-feature">Transparent reporting</div>
+        <div class="col-us"><span class="check">✓</span> Weekly performance reviews</div>
+        <div><span class="cross">✗</span> Monthly PDF reports only</div>
+      </div>
+      <div class="compare-row">
+        <div class="col-feature">Budget flexibility</div>
+        <div class="col-us"><span class="check">✓</span> Start from ₹8,000/month</div>
+        <div><span class="cross">✗</span> ₹50K+ minimum retainers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ============================================
+     FAQ
+============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">FAQ</span>
+      <h2 class="display-2">Every Question You<br>Were Thinking About</h2>
+    </div>
+    <div class="faq-wrap fade-up">
+
+      <div class="faq-item">
+        <button class="faq-q">Will this work if I've never run Meta Ads for my project before? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — most builders and brokers we work with have only ever used boosted posts or portal listings. We handle all technical setup, campaign structure, and creative strategy. Your job is to show up for site visits and let your sales team close.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What monthly ad budget do I need to start? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We recommend starting with a minimum of ₹8,000–₹15,000/month for testing. Once we identify winning creatives (usually within 10–14 days), we scale based on your cost per booked site visit. We'll never recommend scaling before the numbers justify it.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do you guarantee site visits or bookings? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We don't guarantee specific numbers — no legitimate agency should. What we guarantee is execution quality: proper campaign structure, creative testing, funnel optimization, and transparent reporting. Most clients see confirmed site visits within the first 10–14 days of launch.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Which types of real estate projects do you work with? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We specialize in residential apartments, villas and independent houses, plotted developments, commercial spaces, and pre-launch projects. We understand RERA compliance requirements, local buyer behaviour, and how each inventory type needs a different funnel.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How long before I see results? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most clients see their first confirmed site visits within 10–14 days of campaign launch. The first 2–3 weeks are a testing phase. By week 4, we usually have enough data to identify winning creatives and scale. Expect meaningful booking impact from month 2 onward.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Will you run my campaigns personally or hand them off to a team? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Rahman personally manages every client campaign. There's no team of interns running your ads. This is why we limit client intake to a maximum of 5 new clients per month — so your project gets the attention it deserves.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">I've burned money on ads before with junk enquiries. Why will this be different? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most real estate campaigns fail because the positioning, funnel, or targeting is wrong — not because Meta Ads don't work. We audit and fix all three before we spend a rupee. The testing phase is structured to minimize wasted footfall while identifying what actually converts for your project.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do I need a landing page or website already built? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. We assess whether you need a landing page, WhatsApp-based brochure funnel, or a direct booking form — and we help set it up. For many projects, a simple WhatsApp-first funnel outperforms any website. We build what your inventory needs, not what looks impressive on paper.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Is this only for large builders, or does it work for independent brokers too? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We work with builders, channel partners, and independent brokers handling anywhere from a single project to a full portfolio. The key qualifier is that you have live, RERA-registered inventory to sell and are ready to invest in a proper paid acquisition system. We don't work with pre-launch land banking or unregistered projects.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What's included in the free Growth Audit Call? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">A 45-minute strategy session where we review your current lead setup, identify the three biggest bottlenecks killing your site visits, and map out what a proper Meta Ads system would look like for your project. No pitch deck, no pressure. Just clarity on what needs to change and how.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     WHATSAPP FORM
+============================================ -->
+<section class="section" id="whatsapp-form">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">Get Started Now</span>
+      <h2 class="display-2">Prefer WhatsApp?<br>We're One Message Away.</h2>
+      <p class="lead">Fill this in and we'll open a pre-formatted WhatsApp message instantly.</p>
+    </div>
+
+    <div class="form-section-wrap fade-up">
+      <!-- Form Card -->
+      <div class="form-card">
+        <h3 class="display-3 form-title">Send Your Details</h3>
+        <p class="form-sub">Takes 60 seconds. We respond within 2 hours on weekdays.</p>
+
+        <!-- Progress indicator -->
+        <div class="form-progress">
+          <div class="progress-steps">
+            <div class="p-step done" id="step1"></div>
+            <div class="p-step active" id="step2"></div>
+            <div class="p-step" id="step3"></div>
+            <div class="p-step" id="step4"></div>
+            <div class="p-step" id="step5"></div>
+          </div>
+          <div class="progress-label" id="progressLabel">Step 2 of 5 — Your Inventory</div>
+        </div>
+
+        <form id="leadForm" novalidate>
+          <div class="field-group">
+            <label class="field-label" for="platform">What Are You Selling? *</label>
+            <select id="platform" class="field-input" required>
+              <option value="">Select your inventory type</option>
+              <option value="Residential Apartments">Residential Apartments</option>
+              <option value="Villas & Independent Houses">Villas & Independent Houses</option>
+              <option value="Plotted Development">Plotted Development</option>
+              <option value="Commercial Property">Commercial Property</option>
+              <option value="Pre-Launch Project">Pre-Launch Project</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="name">Full Name *</label>
+            <input id="name" type="text" class="field-input" placeholder="Enter your full name" required autocomplete="name" />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="phone">WhatsApp Number *</label>
+            <input id="phone" type="tel" class="field-input" placeholder="10-digit mobile number" required autocomplete="tel" pattern="[0-9]{10}" />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="income">Current Deals Closed / Month</label>
+            <select id="income" class="field-input">
+              <option value="">Select your range</option>
+              <option value="0-1 units/month">0–1 units/month</option>
+              <option value="2-5 units/month">2–5 units/month</option>
+              <option value="5-10 units/month">5–10 units/month</option>
+              <option value="10+ units/month">10+ units/month</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="adbudget">Monthly Ad Budget You Can Invest</label>
+            <select id="adbudget" class="field-input">
+              <option value="">Select your budget</option>
+              <option value="₹8K–₹15K">₹8,000 – ₹15,000</option>
+              <option value="₹15K–₹30K">₹15,000 – ₹30,000</option>
+              <option value="₹30K–₹50K">₹30,000 – ₹50,000</option>
+              <option value="₹50K+">₹50,000+</option>
+            </select>
+          </div>
+
+          <button type="submit" id="sendBtn" class="wa-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Send on WhatsApp
+          </button>
+          <p class="form-fine">No spam. Your data is saved securely and used only to contact you.</p>
+        </form>
+      </div>
+
+      <!-- Aside Benefits -->
+      <div class="form-aside fade-up delay-2">
+        <div>
+          <h3 class="display-3" style="margin-bottom: 6px;">Why 150+ Builders<br>& Brokers Chose AdHabits</h3>
+          <p style="color: var(--text-secondary); font-size: 14px; margin-top: 8px;">Numbers from real client campaigns.</p>
+        </div>
+
+        <div class="aside-stat-grid">
+          <div class="a-stat">
+            <div class="num">3+</div>
+            <div class="lbl">Years Experience</div>
+          </div>
+          <div class="a-stat">
+            <div class="num">170+</div>
+            <div class="lbl">Clients Served</div>
+          </div>
+          <div class="a-stat">
+            <div class="num">₹50L+</div>
+            <div class="lbl">Ad Budget Run</div>
+          </div>
+        </div>
+
+        <div class="benefit-list">
+          <div class="benefit-item">
+            <span class="benefit-icon">✓</span>
+            <span>Direct access to Rahman — not a junior account manager</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">✓</span>
+            <span>Inventory-specific strategy for residential, plots, commercial & pre-launch</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">✓</span>
+            <span>Project positioning + funnel setup included — not just "running ads"</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">✓</span>
+            <span>Start with ₹8,000/month budget. Scale only when the numbers prove it.</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">✓</span>
+            <span>WhatsApp pre-visit qualification sequences so your team only meets serious buyers</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">✓</span>
+            <span>Weekly performance reports — never in the dark about your numbers</span>
+          </div>
+        </div>
+
+        <a href="#schedule" target="_self" class="btn-primary" style="width: 100%; justify-content: center;">
+          Book Free Audit Call
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+============================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://i.postimg.cc/3rVMTKYG/adhabits-logo.png" alt="AdHabits" />
+        AdHabits
+      </div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/adhabits.in/" target="_blank" rel="noopener">Instagram</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Refund Policy</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <p class="footer-disclaimer">
+      AdHabits is a digital marketing and consulting company. We do not sell, broker, or hold license to sell any real estate inventory, and we are not a RERA-registered real estate agent. Individual results vary significantly based on project quality, pricing, location, and market conditions. No sales or revenue guarantees are made or implied. This site is not affiliated with, endorsed by, or sponsored by Meta, Facebook, WhatsApp, RERA, or any real estate portal mentioned. Testimonials reflect individual client experiences and are not guarantees of future results.
+    </p>
+    <div class="footer-bottom">
+      <span>© 2025 AdHabits. All rights reserved. Jaipur, India.</span>
+      <span class="footer-contact">
+        <a href="tel:9743140915">+91 97431 40915</a> · <a href="mailto:adhabits5@gmail.com">adhabits5@gmail.com</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     WHATSAPP FLOAT
+============================================ -->
+<div class="wa-float">
+  <div class="wa-float-badge">Questions? Chat with us ↓</div>
+  <a href="https://wa.me/919610580359" target="_blank" rel="noopener" class="wa-float-btn" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</div>
+
+<!-- ============================================
+     JAVASCRIPT
+============================================ -->
+<script>
+  // ---- Scroll Reveal ----
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('on');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+  // ---- Smooth anchor scroll (internal links) ----
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ---- FAQ Accordion ----
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // ---- Form Progress Indicator ----
+  const fields = ['platform', 'name', 'phone', 'income', 'adbudget'];
+  const steps = document.querySelectorAll('.p-step');
+  const progressLabel = document.getElementById('progressLabel');
+  const stepLabels = [
+    'Step 1 of 5 — Inventory Type',
+    'Step 2 of 5 — Your Name',
+    'Step 3 of 5 — Phone Number',
+    'Step 4 of 5 — Deals Closed',
+    'Step 5 of 5 — Ad Budget'
+  ];
+
+  fields.forEach((fieldId, i) => {
+    const el = document.getElementById(fieldId);
+    if (!el) return;
+    el.addEventListener('change', updateProgress);
+    el.addEventListener('input', updateProgress);
+  });
+
+  function updateProgress() {
+    let filledCount = 0;
+    fields.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el && el.value.trim()) filledCount = i + 1;
+    });
+    steps.forEach((step, i) => {
+      step.classList.remove('done', 'active');
+      if (i < filledCount) step.classList.add('done');
+      else if (i === filledCount) step.classList.add('active');
+    });
+    if (progressLabel) {
+      progressLabel.textContent = filledCount >= fields.length
+        ? 'All done — hit Send!'
+        : stepLabels[Math.min(filledCount, stepLabels.length - 1)];
+    }
+  }
+
+  // ---- WhatsApp Form Submit ----
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbznR1Wk3Gn2jztC1ZXnBW4jr52146ctHC3phfdn8Ve3zuwKvCflNIOy_sxfPZNhQbbf/exec";
+  const WHATSAPP_TO = "919610580359";
+
+  const leadForm = document.getElementById('leadForm');
+  const sendBtn = document.getElementById('sendBtn');
+
+  if (leadForm && sendBtn) {
+    leadForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const platform = document.getElementById('platform').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const income = document.getElementById('income').value.trim();
+      const adbudget = document.getElementById('adbudget').value.trim();
+
+      if (!platform || !name || !phone) {
+        alert('⚠️ Please fill Inventory Type, Name, and Phone Number.');
+        return;
+      }
+      if (!/^[0-9]{10}$/.test(phone)) {
+        alert('⚠️ Enter a valid 10-digit phone number.');
+        return;
+      }
+
+      const originalHTML = sendBtn.innerHTML;
+      sendBtn.disabled = true;
+      sendBtn.innerHTML = '<span style="opacity:0.7">Opening WhatsApp...</span>';
+
+      // Save to Google Sheets
+      const payload = new URLSearchParams({
+        name, phone, platform,
+        income: income || 'Not specified',
+        adbudget: adbudget || 'Not specified',
+        plan: 'Real Estate Meta Ads Inquiry',
+        timestamp: new Date().toISOString()
+      });
+
+      try {
+        if (navigator.sendBeacon) {
+          const blob = new Blob([payload.toString()], { type: 'application/x-www-form-urlencoded' });
+          navigator.sendBeacon(SCRIPT_URL, blob);
+        } else {
+          fetch(SCRIPT_URL, { method: 'POST', body: payload, mode: 'no-cors', keepalive: true }).catch(() => {});
+        }
+      } catch(_) {}
+
+      // Meta Pixel
+      if (typeof fbq === 'function') {
+        fbq('trackSingle', '1609093500184090', 'Contact', {
+          content_name: 'WhatsApp Lead Form',
+          content_category: platform
+        });
+      }
+
+      // Build WhatsApp message
+      const msg = `Hello Rahman sir,\n\nI want to fill my site visits with qualified buyers using Meta Ads. Here are my details:\n\n🏷️ *Selling:* ${platform}\n👤 *Name:* ${name}\n📱 *Phone:* ${phone}${income ? `\n🏗️ *Current Deals Closed:* ${income}` : ''}${adbudget ? `\n📊 *Ad Budget:* ${adbudget}` : ''}\n\nPlease let me know the next steps!`;
+      window.open(`https://wa.me/${WHATSAPP_TO}?text=${encodeURIComponent(msg)}`, '_blank');
+
+      setTimeout(() => {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = originalHTML;
+        leadForm.reset();
+        steps.forEach(s => { s.classList.remove('done','active'); });
+        if(steps[0]) steps[0].classList.add('active');
+        if(progressLabel) progressLabel.textContent = stepLabels[0];
+      }, 2500);
+    });
+  }
+</script>
+
+</body>
+</html>
